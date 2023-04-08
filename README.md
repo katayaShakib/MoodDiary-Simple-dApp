@@ -1,5 +1,5 @@
 # MoodDiary Simple dApp
-A webpage that interacted with a real live Ethereum testnet on the internet.
+A webpage that interact with a smart contract on a real live Ethereum testnet on the internet.
 ## Setup and Usage Steps
 01. Download and Install MetaMask.
 02. Click Ethereum Mainnet at the top. Change to the Goerli Testnet and get a copy of the account's public address on your Metamask Wallet.
