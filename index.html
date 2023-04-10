@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Simple dApp</title>
+
+    <!-- add some styles to make the webpage look a bit nicer -->
     <style>
       body {
         text-align: center;
@@ -25,6 +27,8 @@
       }
     </style>
   </head>
+
+  <!-- to create an app that simply reads and writes a value to the blockchain. We will need an input, paragraphs, and buttons -->
   <body>
     <div>
       <h1>Mood Diary</h1>
@@ -32,16 +36,20 @@
       <button onclick="getMood()">Get Mood</button>
       <input type="text" id="mood" placeholder="Input mood..." />
       <button onclick="setMood()">Set Mood</button>
+
+      <!-- tag to show the mood -->
       <p id="showMood"></p>
     </div>
   </body>
 
+  <!-- Import the Ethers.js source -->
   <script
     src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"
     type="application/javascript"
   ></script>
 
   <script>
+    /* Specify the contract address on our provider's blockchain (Goerli) and the contract ABI */
     const MoodContractAddress = "0xd615B39C35Ac7128E7554E62A0AA3b7Ac99e04E0";
     const MoodContractABI = [
       {
@@ -75,11 +83,14 @@
     let MoodContract;
     let signer;
 
+    /* Define an ethers provider. In our case it is Goerli */
     const provider = new ethers.providers.Web3Provider(
       window.ethereum,
       "goerli"
     );
 
+    /* Request access to the user's wallet and connect the signer to your metamask account (we use [0] as the default), 
+    and define the contract object using the contract address, ABI, and signer */
     provider.send("eth_requestAccounts", []).then(() => {
       provider.listAccounts().then((accounts) => {
         signer = provider.getSigner(accounts[0]);
@@ -91,6 +102,7 @@
       });
     });
 
+    /* Create asynchronous functions to call the smart contract functions */
     async function getMood() {
       const getMoodPromise = MoodContract.getMood();
       const Mood = await getMoodPromise;
